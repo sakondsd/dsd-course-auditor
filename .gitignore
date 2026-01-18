@@ -1,0 +1,5 @@
+.venv/
+.env
+db_storage/
+__pycache__/
+*.pyc
