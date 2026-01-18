@@ -1,5 +1,12 @@
+# .gitignore
+
 .venv/
 .env
-db_storage/
 __pycache__/
 *.pyc
+
+# ❌ ลบบรรทัด knowledge_base/ ออก (ถ้ามี)
+# เราต้องการให้ไฟล์ .txt ถูกอัปโหลดไปบน GitHub ด้วย เพื่อให้มีไฟล์ต้นฉบับเสมอ
+
+# ✅ แต่ยังคง ignore db_storage/ ไว้เหมือนเดิม
+db_storage/
