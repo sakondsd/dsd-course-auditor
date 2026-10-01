@@ -2,8 +2,22 @@ import streamlit as st
 from src.logic import data_manager, ai_auditor, doc_generator
 
 def render():
-    # ภาพปก Hero Section
-    st.image("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop", use_container_width=True)
+    # ภาพปก Hero Section (บังคับความสูงไม่ให้ใหญ่เกินไปบนจอใหญ่)
+    st.markdown(
+        """
+        <style>
+        .hero-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        </style>
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" class="hero-image">
+        """,
+        unsafe_allow_html=True
+    )
     st.title("🛡️ ระบบ AI ผู้ตรวจสอบหลักสูตร (Auditor)")
     st.caption("ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน")
 
