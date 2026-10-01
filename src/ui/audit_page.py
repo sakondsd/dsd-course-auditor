@@ -6,20 +6,40 @@ def render():
     st.caption("ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน")
 
     # --- ส่วนที่ 1: ข้อมูลหลักสูตร ---
-    st.subheader("1. ข้อมูลหลักสูตร")
+    col_h1, col_h2 = st.columns([4, 1])
+    with col_h1:
+        st.subheader("1. ข้อมูลหลักสูตร")
+    with col_h2:
+        if st.button("📝 โหลดตัวอย่าง", use_container_width=True):
+            st.session_state['course_name_input'] = "การติดตั้งเครื่องปรับอากาศภายในบ้านและการพาณิชย์"
+            st.session_state['job_title_input'] = "ช่างเครื่องปรับอากาศในบ้านและการพาณิชย์ขนาดเล็ก"
+            st.session_state['duration_input'] = 18
+            st.session_state['topic_list'] = [
+                "ความปลอดภัยในการใช้สารทำความเย็น",
+                "การใช้เครื่องมือทางไฟฟ้าและช่างแอร์",
+                "การติดตั้งคอยล์เย็นและคอยล์ร้อน",
+                "การบานแฟร์และการเชื่อมท่อทองแดง",
+                "การทำระบบสุญญากาศและการเติมน้ำยาแอร์"
+            ]
+            st.rerun()
     
+    # กำหนดค่าเริ่มต้นให้กับ duration หากยังไม่มี
+    if "duration_input" not in st.session_state:
+        st.session_state["duration_input"] = 6
+
     # ✅ ปรับ Layout ใหม่: ชื่อหลักสูตรอยู่บนสุด (เต็มความกว้าง)
     course_name = st.text_input(
         "ชื่อหลักสูตร (Course Name)", 
+        key="course_name_input",
         placeholder="เช่น การติดตั้งระบบไฟฟ้าเบื้องต้น สำหรับอาคารพาณิชย์และโรงงานอุตสาหกรรมขนาดเล็ก"
     )
 
     # บรรทัดที่ 2: แบ่งคอลัมน์สำหรับ ตำแหน่ง และ ชั่วโมง
     col1, col2 = st.columns([3, 1])
     with col1:
-        job_title = st.text_input("ตำแหน่งผู้เข้าฝึก (Job Title)", placeholder="เช่น ช่างไฟฟ้าภายในอาคาร")
+        job_title = st.text_input("ตำแหน่งผู้เข้าฝึก (Job Title)", key="job_title_input", placeholder="เช่น ช่างไฟฟ้าภายในอาคาร")
     with col2:
-        duration = st.number_input("จำนวนชั่วโมงฝึก (Hours)", min_value=1, value=6, step=1)
+        duration = st.number_input("จำนวนชั่วโมงฝึก (Hours)", key="duration_input", min_value=1, step=1)
 
     # --- ส่วนที่ 2: หัวข้อวิชา (Dynamic List) ---
     st.subheader("2. หัวข้อวิชาที่ต้องการตรวจสอบ")
