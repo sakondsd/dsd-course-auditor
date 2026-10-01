@@ -6,7 +6,7 @@ def render():
     st.caption("ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน")
 
     # --- ส่วนที่ 1: ข้อมูลหลักสูตร ---
-    col_h1, col_h2 = st.columns([4, 1])
+    col_h1, col_h2 = st.columns([2, 1])
     with col_h1:
         st.subheader("1. ข้อมูลหลักสูตร")
     with col_h2:
@@ -35,7 +35,7 @@ def render():
     )
 
     # บรรทัดที่ 2: แบ่งคอลัมน์สำหรับ ตำแหน่ง และ ชั่วโมง
-    col1, col2 = st.columns([3, 1])
+    col1, col2 = st.columns([2, 1])
     with col1:
         job_title = st.text_input("ตำแหน่งผู้เข้าฝึก (Job Title)", key="job_title_input", placeholder="เช่น ช่างไฟฟ้าภายในอาคาร")
     with col2:
@@ -52,7 +52,7 @@ def render():
     topics_to_remove = []
     
     for i, topic in enumerate(st.session_state['topic_list']):
-        c1, c2 = st.columns([8, 1])
+        c1, c2 = st.columns([6, 1])
         with c1:
             st.session_state['topic_list'][i] = st.text_input(
                 f"หัวข้อที่ {i+1}", 
