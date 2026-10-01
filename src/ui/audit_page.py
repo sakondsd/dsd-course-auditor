@@ -119,7 +119,8 @@ def render():
         border: 1px solid #c8a94a;
         border-radius: 10px;
         padding: 12px 16px;
-        margin-bottom: 14px;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
     .example-label {
         font-size: 0.85rem;
