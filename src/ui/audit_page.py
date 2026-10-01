@@ -14,13 +14,16 @@ def render():
             st.session_state['course_name_input'] = "การติดตั้งเครื่องปรับอากาศภายในบ้านและการพาณิชย์"
             st.session_state['job_title_input'] = "ช่างเครื่องปรับอากาศในบ้านและการพาณิชย์ขนาดเล็ก"
             st.session_state['duration_input'] = 18
-            st.session_state['topic_list'] = [
+            example_topics = [
                 "ความปลอดภัยในการใช้สารทำความเย็น",
                 "การใช้เครื่องมือทางไฟฟ้าและช่างแอร์",
                 "การติดตั้งคอยล์เย็นและคอยล์ร้อน",
                 "การบานแฟร์และการเชื่อมท่อทองแดง",
                 "การทำระบบสุญญากาศและการเติมน้ำยาแอร์"
             ]
+            st.session_state['topic_list'] = example_topics
+            for i, t in enumerate(example_topics):
+                st.session_state[f"topic_input_{i}"] = t
             st.rerun()
     
     # กำหนดค่าเริ่มต้นให้กับ duration หากยังไม่มี
