@@ -58,53 +58,136 @@ def load_example(key: str):
 
 def render():
     # ===============================================================
-    # CSS สำหรับ Layout ที่สวยงาม
+    # CSS — โทนสี DSD: Navy Blue + Gold
     # ===============================================================
     st.markdown("""
     <style>
-    /* Hero banner — เต็มความกว้าง ความสูงคงที่ */
+    /* ===== พื้นหลังหน้าจอหลัก ===== */
+    .stApp {
+        background-color: #f0f4f8;
+    }
+
+    /* ===== Hero Banner ===== */
     .hero-banner {
         width: 100%;
-        height: 220px;
+        height: 240px;
         object-fit: cover;
-        object-position: center 40%;
-        border-radius: 14px;
+        object-position: center 35%;
+        border-radius: 16px;
         display: block;
-        margin-bottom: 0px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.18);
     }
-    /* Card style สำหรับส่วนฟอร์ม */
-    .section-card {
-        background: #f8fafd;
-        border: 1px solid #e0e7ef;
+
+    /* ===== Hero Title overlay box ===== */
+    .hero-title-box {
+        background: linear-gradient(135deg, #0d2b55 0%, #1a4a8a 100%);
+        border-left: 6px solid #c8a94a;
         border-radius: 12px;
-        padding: 20px 24px 10px 24px;
-        margin-bottom: 18px;
+        padding: 18px 24px;
+        margin-top: 16px;
+        margin-bottom: 8px;
     }
-    /* หัว section แต่ละการ์ด */
-    .section-title {
-        font-size: 1.15rem;
+    .hero-title-box h2 {
+        color: #ffffff !important;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0 0 4px 0;
+    }
+    .hero-title-box p {
+        color: #c8d8f0 !important;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* ===== ป้ายหัว section ===== */
+    .section-header {
+        background: linear-gradient(90deg, #0d2b55, #1a4a8a);
+        color: #ffffff !important;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 1.05rem;
         font-weight: 700;
-        color: #1a3a5c;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        margin-bottom: 14px;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
     }
-    /* ปุ่ม example — ดูเหมือน chip */
-    div[data-testid="stButton"] > button[kind="secondary"] {
-        border-radius: 20px !important;
+
+    /* ===== กล่องตัวอย่าง ===== */
+    .example-box {
+        background: #fff8e6;
+        border: 1px solid #c8a94a;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-bottom: 14px;
+    }
+    .example-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #7a5c00;
+        margin-bottom: 8px;
+    }
+
+    /* ===== ปุ่มตัวอย่าง ===== */
+    div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button {
+        background-color: #ffffff !important;
+        color: #0d2b55 !important;
+        border: 2px solid #0d2b55 !important;
+        border-radius: 24px !important;
+        font-weight: 600 !important;
         font-size: 0.88rem !important;
+        transition: all 0.2s ease;
     }
-    /* ปุ่มหลัก */
-    div[data-testid="stButton"] > button[kind="primary"] {
+    div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button:hover {
+        background-color: #0d2b55 !important;
+        color: #ffffff !important;
+    }
+
+    /* ===== ปุ่ม primary (เริ่มตรวจสอบ) ===== */
+    button[kind="primary"] {
+        background: linear-gradient(135deg, #0d2b55 0%, #1a4a8a 100%) !important;
+        border: none !important;
+        color: #ffffff !important;
         border-radius: 10px !important;
         font-size: 1rem !important;
-        padding: 0.6rem 2rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.5px;
     }
-    /* ลด padding หน้าจอเล็ก */
+    button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #c8a94a 0%, #e8c96a 100%) !important;
+        color: #0d2b55 !important;
+    }
+
+    /* ===== Input fields ===== */
+    div[data-testid="stTextInput"] input,
+    div[data-testid="stNumberInput"] input {
+        border: 1.5px solid #b0bfd0 !important;
+        border-radius: 8px !important;
+        background: #ffffff !important;
+    }
+    div[data-testid="stTextInput"] input:focus,
+    div[data-testid="stNumberInput"] input:focus {
+        border-color: #1a4a8a !important;
+        box-shadow: 0 0 0 2px rgba(26,74,138,0.15) !important;
+    }
+
+    /* ===== label สี navy ===== */
+    label[data-testid="stWidgetLabel"] p {
+        color: #0d2b55 !important;
+        font-weight: 600 !important;
+    }
+
+    /* ===== Divider ===== */
+    hr {
+        border-color: #c8a94a !important;
+        opacity: 0.4;
+    }
+
+    /* ===== Responsive ===== */
     @media (max-width: 768px) {
-        .hero-banner { height: 140px; border-radius: 10px; }
-        .section-card { padding: 14px 14px 6px 14px; }
+        .hero-banner { height: 150px; border-radius: 10px; }
+        .hero-title-box { padding: 12px 16px; }
+        .hero-title-box h2 { font-size: 1.2rem; }
     }
     </style>
     """, unsafe_allow_html=True)
@@ -117,17 +200,17 @@ def render():
         '?q=80&w=1400&auto=format&fit=crop" class="hero-banner" alt="DSD Course Auditor">',
         unsafe_allow_html=True
     )
-
-    st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
-    st.title("🛡️ ระบบ AI ผู้ตรวจสอบหลักสูตร")
-    st.caption("ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน กรมพัฒนาฝีมือแรงงาน")
-
-    st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="hero-title-box">
+        <h2>🛡️ ระบบ AI ผู้ตรวจสอบหลักสูตร (Auditor)</h2>
+        <p>ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน กรมพัฒนาฝีมือแรงงาน</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # ===============================================================
     # ส่วนตัวอย่าง
     # ===============================================================
-    st.markdown("#### 💡 ทดลองด้วยข้อมูลตัวอย่าง")
+    st.markdown('<div class="example-box"><div class="example-label">💡 ทดลองด้วยข้อมูลตัวอย่าง — กดเพื่อเติมข้อมูลอัตโนมัติ</div></div>', unsafe_allow_html=True)
     ex1, ex2, ex3 = st.columns(3)
     if ex1.button("❄️ ช่างแอร์", use_container_width=True):
         load_example("air"); st.rerun()
@@ -136,13 +219,12 @@ def render():
     if ex3.button("🔧 ช่างเชื่อม", use_container_width=True):
         load_example("weld"); st.rerun()
 
-    st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
     st.divider()
 
     # ===============================================================
     # ส่วนที่ 1: ข้อมูลหลักสูตร
     # ===============================================================
-    st.markdown("### 1. ข้อมูลหลักสูตร")
+    st.markdown('<div class="section-header">1. ข้อมูลหลักสูตร</div>', unsafe_allow_html=True)
 
     # กำหนดค่าเริ่มต้น duration
     if "duration_input" not in st.session_state:
@@ -174,7 +256,7 @@ def render():
     # ===============================================================
     # ส่วนที่ 2: หัวข้อวิชา
     # ===============================================================
-    st.markdown("### 2. หัวข้อวิชาที่ต้องการตรวจสอบ")
+    st.markdown('<div class="section-header">2. หัวข้อวิชาที่ต้องการตรวจสอบ</div>', unsafe_allow_html=True)
 
     if 'topic_list' not in st.session_state:
         st.session_state['topic_list'] = ["ความปลอดภัยในการทำงาน", ""]
