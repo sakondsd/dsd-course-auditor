@@ -2,28 +2,41 @@ import streamlit as st
 from src.logic import data_manager, ai_auditor, doc_generator
 
 def render():
+    # ภาพปก Hero Section
+    st.image("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop", use_container_width=True)
     st.title("🛡️ ระบบ AI ผู้ตรวจสอบหลักสูตร (Auditor)")
     st.caption("ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน")
 
     # --- ส่วนที่ 1: ข้อมูลหลักสูตร ---
-    col_h1, col_h2 = st.columns([2, 1])
-    with col_h1:
-        st.subheader("1. ข้อมูลหลักสูตร")
-    with col_h2:
-        if st.button("📝 โหลดตัวอย่าง", use_container_width=True):
+    st.subheader("1. ข้อมูลหลักสูตร")
+    
+    with st.expander("📝 โหลดข้อมูลตัวอย่างสำหรับทดสอบ"):
+        ex1, ex2, ex3 = st.columns(3)
+        if ex1.button("❄️ ช่างแอร์", use_container_width=True):
             st.session_state['course_name_input'] = "การติดตั้งเครื่องปรับอากาศภายในบ้านและการพาณิชย์"
             st.session_state['job_title_input'] = "ช่างเครื่องปรับอากาศในบ้านและการพาณิชย์ขนาดเล็ก"
             st.session_state['duration_input'] = 18
-            example_topics = [
-                "ความปลอดภัยในการใช้สารทำความเย็น",
-                "การใช้เครื่องมือทางไฟฟ้าและช่างแอร์",
-                "การติดตั้งคอยล์เย็นและคอยล์ร้อน",
-                "การบานแฟร์และการเชื่อมท่อทองแดง",
-                "การทำระบบสุญญากาศและการเติมน้ำยาแอร์"
-            ]
+            example_topics = ["ความปลอดภัยในการใช้สารทำความเย็น", "การใช้เครื่องมือทางไฟฟ้าและช่างแอร์", "การติดตั้งคอยล์เย็นและคอยล์ร้อน", "การบานแฟร์และการเชื่อมท่อทองแดง", "การทำระบบสุญญากาศและการเติมน้ำยาแอร์"]
             st.session_state['topic_list'] = example_topics
-            for i, t in enumerate(example_topics):
-                st.session_state[f"topic_input_{i}"] = t
+            for i, t in enumerate(example_topics): st.session_state[f"topic_input_{i}"] = t
+            st.rerun()
+            
+        if ex2.button("⚡ ช่างไฟฟ้า", use_container_width=True):
+            st.session_state['course_name_input'] = "การเดินสายไฟฟ้าภายในอาคารด้วยท่อร้อยสาย"
+            st.session_state['job_title_input'] = "ช่างไฟฟ้าภายในอาคาร ระดับ 1"
+            st.session_state['duration_input'] = 30
+            example_topics = ["ความปลอดภัยและกฎหมายที่เกี่ยวข้อง", "การเลือกใช้สายไฟและท่อร้อยสาย", "การตัด ดัด และติดตั้งท่อร้อยสายไฟ", "การร้อยสายและต่อสายไฟ", "การตรวจสอบและทดสอบวงจร"]
+            st.session_state['topic_list'] = example_topics
+            for i, t in enumerate(example_topics): st.session_state[f"topic_input_{i}"] = t
+            st.rerun()
+            
+        if ex3.button("🔧 ช่างเชื่อม", use_container_width=True):
+            st.session_state['course_name_input'] = "การเชื่อมอาร์กโลหะด้วยมือ (SMAW)"
+            st.session_state['job_title_input'] = "ช่างเชื่อมอาร์กโลหะด้วยมือ ระดับ 1"
+            st.session_state['duration_input'] = 24
+            example_topics = ["ความปลอดภัยในการเชื่อม", "หลักการเชื่อมอาร์กโลหะด้วยมือ", "การปรับตั้งกระแสไฟและเลือกใช้ลวดเชื่อม", "เทคนิคการเชื่อมท่าราบและท่าขนานจาน", "การตรวจสอบรอยเชื่อมเบื้องต้น"]
+            st.session_state['topic_list'] = example_topics
+            for i, t in enumerate(example_topics): st.session_state[f"topic_input_{i}"] = t
             st.rerun()
     
     # กำหนดค่าเริ่มต้นให้กับ duration หากยังไม่มี
