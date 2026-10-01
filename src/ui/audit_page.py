@@ -67,36 +67,36 @@ def render():
         background-color: #f0f4f8;
     }
 
-    /* ===== Hero Banner ===== */
-    .hero-banner {
+    /* ===== Hero Section รวมภาพ + ข้อความในกล่องเดียว ===== */
+    .hero-section {
         width: 100%;
         height: 240px;
-        object-fit: cover;
-        object-position: center 35%;
         border-radius: 16px;
-        display: block;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 28px 32px;
+        box-sizing: border-box;
+        background-image:
+            linear-gradient(to top, rgba(7,26,55,0.88) 0%, rgba(7,26,55,0.45) 55%, rgba(0,0,0,0.05) 100%),
+            url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1400&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center 35%;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        border-left: 5px solid #c8a94a;
     }
-
-    /* ===== Hero Title overlay box ===== */
-    .hero-title-box {
-        background: linear-gradient(135deg, #0d2b55 0%, #1a4a8a 100%);
-        border-left: 6px solid #c8a94a;
-        border-radius: 12px;
-        padding: 18px 24px;
-        margin-top: 16px;
-        margin-bottom: 8px;
-    }
-    .hero-title-box h2 {
+    .hero-section h2 {
         color: #ffffff !important;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 800;
-        margin: 0 0 4px 0;
+        margin: 0 0 6px 0;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
-    .hero-title-box p {
-        color: #c8d8f0 !important;
-        font-size: 0.9rem;
+    .hero-section p {
+        color: #dde8f8 !important;
+        font-size: 0.92rem;
         margin: 0;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* ===== ป้ายหัว section ===== */
@@ -185,23 +185,18 @@ def render():
 
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
-        .hero-banner { height: 150px; border-radius: 10px; }
-        .hero-title-box { padding: 12px 16px; }
-        .hero-title-box h2 { font-size: 1.2rem; }
+        .hero-section { height: 160px; border-radius: 10px; }
+        .hero-section h2 { font-size: 1.1rem; }
+        .hero-section p { font-size: 0.78rem; }
     }
     </style>
     """, unsafe_allow_html=True)
 
     # ===============================================================
-    # Hero Banner
+    # Hero Section — รวมภาพ + ชื่อไว้ในกล่องเดียวกัน
     # ===============================================================
-    st.markdown(
-        '<img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158'
-        '?q=80&w=1400&auto=format&fit=crop" class="hero-banner" alt="DSD Course Auditor">',
-        unsafe_allow_html=True
-    )
     st.markdown("""
-    <div class="hero-title-box">
+    <div class="hero-section">
         <h2>🛡️ ระบบ AI ผู้ตรวจสอบหลักสูตร (Auditor)</h2>
         <p>ตรวจสอบความสอดคล้องของหัวข้อวิชา ตามกฎระเบียบและมาตรฐานฝีมือแรงงาน กรมพัฒนาฝีมือแรงงาน</p>
     </div>
